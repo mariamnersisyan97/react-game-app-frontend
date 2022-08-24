@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./Home";
 import Navbar from "./Navbar";
 import SongLibrary from "./SongLibrary";
+import Submit from "./Submit";
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="navbar" element={<Navbar />} />
         <Route path="library" element={<SongLibrary />} />
+        <Route path="submit" element={<Submit />} />
       </Routes>
     </div>
   );
