@@ -1,0 +1,5 @@
+- Landing page with songs database
+- Login that tells them they have logged in
+- Playlist page that shows songs added to playlist
+- Button feature that adds to playlist from song DB
+- Filter feature based on artists + songs

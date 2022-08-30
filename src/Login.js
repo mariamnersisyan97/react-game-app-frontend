@@ -15,14 +15,13 @@ export const Login = () => {
   const classes = useStyles();
   return (
     <div className="login">
-      <h3>Login</h3>
       <form className={classes.root} noValidate autoComplete="off">
         <TextField id="outlined-basic" label="First Name" variant="outlined" />
         <TextField id="outlined-basic" label="Last Name" variant="outlined" />
         <TextField id="outlined-basic" label="Email" variant="outlined" />
       </form>
       <Button variant="outlined" color="secondary">
-        Login
+        Click to Login
       </Button>
     </div>
   );

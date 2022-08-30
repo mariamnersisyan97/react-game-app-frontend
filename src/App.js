@@ -28,11 +28,7 @@ function App() {
   }));
   const classes = useStyles();
 
-  const [loginRender, setLoginRender] = useState([]);
-  const loginOnClick = () => {
-    setLoginRender((login) => [...login, <Login />]);
-    console.log("login");
-  };
+  const [loginRender, setLoginRender] = useState("");
 
   return (
     <div className="App">
@@ -47,9 +43,10 @@ function App() {
           <Typography variant="h6" className={classes.title}>
             Jukebox
           </Typography>
-          <Button onClick={loginOnClick} color="inherit">
-            Login
+          <Button onClick={() => setLoginRender("Login")} color="inherit">
+            Login{loginRender === "Login" && <Login />}
           </Button>
+          {/* <div>{loginRender === "Login" && <Login />}</div> */}
         </Toolbar>
       </AppBar>
 
