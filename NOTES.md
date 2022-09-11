@@ -1,5 +1,8 @@
-- Landing page with songs database
-- Login that tells them they have logged in
-- Playlist page that shows songs added to playlist
-- Button feature that adds to playlist from song DB
-- Filter feature based on artists + songs
+##
+
+- Nav (Home{login}, Game Library, Add a Game, Shopping Cart)
+- Landing page with Login & "You have logged in!"
+- Game Library with all info
+- Shopping Cart with added games
+- Add a Game
+- Filter feature to filter through genre(in GLibrary)

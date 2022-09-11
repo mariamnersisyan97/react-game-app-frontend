@@ -1,18 +1,18 @@
 import { IconButton } from "@material-ui/core";
 import * as React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./Home";
-import { Login } from "./Login";
-import Navbar from "./Navbar";
-import SongLibrary from "./SongLibrary";
-import Submit from "./Submit";
+import Home from "./navigation/components/Home";
+import { Login } from "./navigation/components/Login";
+import Navbar from "./navigation/components/Navbar";
+import GameLibrary from "./navigation/components/GameLibrary";
+import Submit from "./navigation/components/Submit";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const useStyles = makeStyles((theme) => ({
@@ -30,6 +30,16 @@ function App() {
 
   const [loginRender, setLoginRender] = useState("");
 
+  const [games, setGames] = useState("");
+
+  const baseURL = `http://localhost:9292/games`;
+
+  useEffect(() => {
+    fetch(baseURL)
+      .then((r) => r.json())
+      .then(setGames);
+  }, []);
+
   return (
     <div className="App">
       <AppBar position="static">
@@ -41,7 +51,7 @@ function App() {
             aria-label="menu"
           ></IconButton>
           <Typography variant="h6" className={classes.title}>
-            Jukebox
+            Gamebox
           </Typography>
           <Button onClick={() => setLoginRender("Login")} color="inherit">
             Login{loginRender === "Login" && <Login />}
@@ -49,13 +59,16 @@ function App() {
           {/* <div>{loginRender === "Login" && <Login />}</div> */}
         </Toolbar>
       </AppBar>
-
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="navbar" element={<Navbar />} />
-        <Route path="library" element={<SongLibrary />} />
-        <Route path="submit" element={<Submit />} />
-        <Route path="login" element={<Login />} />
+        <Route exact path="/" element={<Home />} />
+        {/* <Route exact path="navbar" element={<Navbar />} /> */}
+        <Route
+          exact
+          path="library"
+          element={<GameLibrary games={games} setGames={setGames} />}
+        />
+        <Route exact path="form" element={<Submit />} />
+        <Route exact path="login" element={<Login />} />
       </Routes>
     </div>
   );
