@@ -1,7 +1,7 @@
 import React from "react";
 import GameCard from "./GameCard";
 
-const SongLibrary = ({ games }) => {
+const GameLibrary = ({ games }) => {
   const renderGames = games.map((game) => (
     <GameCard key={game.id} game={game} />
   ));
@@ -13,4 +13,4 @@ const SongLibrary = ({ games }) => {
   );
 };
 
-export default SongLibrary;
+export default GameLibrary;

@@ -14,13 +14,15 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <h1>
-        <span className="logo" role="img">
+        {/* <span className="logo" role="img">
           Game Index
-        </span>
+        </span> */}
       </h1>
-      <NavLink to="/">Home Page</NavLink>
-      <NavLink to="/games">Games</NavLink>
-      <NavLink to="/cart">Shopping Cart</NavLink>
+      <NavLink to="/">🏠</NavLink>
+      <NavLink to="/library">🎮</NavLink>
+      <NavLink to="/form">📝</NavLink>
+      <NavLink to="/cart">🛒</NavLink>
+      <NavLink to="/login">👤</NavLink>
     </div>
   );
 };

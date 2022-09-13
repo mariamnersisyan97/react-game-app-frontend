@@ -6,12 +6,11 @@ import Home from "./navigation/components/Home";
 import { Login } from "./navigation/components/Login";
 import Navbar from "./navigation/components/Navbar";
 import GameLibrary from "./navigation/components/GameLibrary";
-import Submit from "./navigation/components/Submit";
+import Form from "./navigation/components/Form";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
   }));
   const classes = useStyles();
 
-  const [loginRender, setLoginRender] = useState("");
+  // const [loginRender, setLoginRender] = useState("");
 
   const [games, setGames] = useState("");
 
@@ -53,12 +52,12 @@ function App() {
           <Typography variant="h6" className={classes.title}>
             Gamebox
           </Typography>
-          <Button onClick={() => setLoginRender("Login")} color="inherit">
-            Login{loginRender === "Login" && <Login />}
-          </Button>
+
           {/* <div>{loginRender === "Login" && <Login />}</div> */}
         </Toolbar>
       </AppBar>
+
+      <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
         {/* <Route exact path="navbar" element={<Navbar />} /> */}
@@ -67,7 +66,7 @@ function App() {
           path="library"
           element={<GameLibrary games={games} setGames={setGames} />}
         />
-        <Route exact path="form" element={<Submit />} />
+        <Route exact path="form" element={<Form />} />
         <Route exact path="login" element={<Login />} />
       </Routes>
     </div>
