@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -12,11 +12,15 @@ export const Login = () => {
       },
     },
   }));
-
-  const loginProcessed = () => {
-    console.log("logged in");
-  };
   const classes = useStyles();
+
+  const [login, setLogin] = useState(false);
+
+  const handleClick = () => {
+    console.log("logged in");
+    setLogin(true);
+  };
+
   return (
     <div className="login">
       <form className={classes.root} noValidate autoComplete="off">
@@ -24,9 +28,14 @@ export const Login = () => {
         <TextField id="outlined-basic" label="Last Name" variant="outlined" />
         <TextField id="outlined-basic" label="Email" variant="outlined" />
       </form>
-      <Button variant="outlined" color="secondary" onClick={loginProcessed}>
+      <Button variant="outlined" color="secondary" onClick={handleClick}>
         Click to Login
       </Button>
+      {login && (
+        <div>
+          <h2> You are logged in!</h2>
+        </div>
+      )}
     </div>
   );
 };

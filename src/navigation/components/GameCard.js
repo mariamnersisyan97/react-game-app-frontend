@@ -36,6 +36,7 @@ const GameCard = ({ game }) => {
       <CardActions>
         <Button variant="contained">Add to Cart</Button>
         <Button variant="contained">❤️ </Button>
+        <Button variant="contained">Delete</Button>
       </CardActions>
     </Card>
     // <Card className={game.root}>
