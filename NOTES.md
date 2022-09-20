@@ -6,3 +6,4 @@
 - Shopping Cart with added games
 - Add a Game
 - Filter feature to filter through genre(in GLibrary)
+
