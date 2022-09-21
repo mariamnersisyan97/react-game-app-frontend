@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import GameLibrary from "./GameLibrary";
 
 const Form = ({ games, setGames, handleAddGame }) => {
   const useStyles = makeStyles((theme) => ({
@@ -16,12 +19,13 @@ const Form = ({ games, setGames, handleAddGame }) => {
 
   const [title, setTitle] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
-  const [genre, setGenre] = useState("");
+  const [genre, setGenre] = useState(null);
   const [imageURL, setImageURL] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleAddGame();
+    return <GameLibrary />;
   };
 
   const titleHandler = (e) => {
@@ -35,13 +39,18 @@ const Form = ({ games, setGames, handleAddGame }) => {
   };
 
   const genreHandler = (e) => {
-    setGenre(e.target.value);
+    setGenre(e.currentTarget);
+    console.log(e.currentTarget);
     console.log(e.target.value);
   };
 
   const imageURLHandler = (e) => {
     setImageURL(e.target.value);
     console.log(e.target.value);
+  };
+
+  const handleClose = () => {
+    setGenre(null);
   };
   return (
     <div className="login">
@@ -66,13 +75,38 @@ const Form = ({ games, setGames, handleAddGame }) => {
           value={releaseDate}
           onChange={releaseDateHandler}
         />
-        <TextField
+        {/* <TextField
           id="outlined-basic"
           label="Genre"
           variant="outlined"
           value={genre}
           onChange={genreHandler}
-        />
+        /> */}
+        <Button
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={genreHandler}
+        >
+          Genres
+        </Button>
+        <Menu
+          id="simple-menu"
+          value={genre}
+          keepMounted
+          open={Boolean(genre)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>Role Playing Game</MenuItem>
+          <MenuItem onClick={handleClose}>Open World</MenuItem>
+          <MenuItem onClick={handleClose}>First-Person Shooter</MenuItem>
+          <MenuItem onClick={handleClose}>Puzzle</MenuItem>
+          <MenuItem onClick={handleClose}>Simulation</MenuItem>
+          <MenuItem onClick={handleClose}>Action-adventure</MenuItem>
+          <MenuItem onClick={handleClose}>
+            Multiplayer Online Battle Arena
+          </MenuItem>
+          <MenuItem onClick={handleClose}>Sports</MenuItem>
+        </Menu>
         <TextField
           id="outlined-basic"
           label="Image URL"
@@ -80,10 +114,10 @@ const Form = ({ games, setGames, handleAddGame }) => {
           value={imageURL}
           onChange={imageURLHandler}
         />
+        <Button variant="outlined" color="secondary">
+          Add to Library
+        </Button>
       </form>
-      <Button variant="outlined" color="secondary">
-        Add to Library
-      </Button>
     </div>
   );
 };

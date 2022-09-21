@@ -1,4 +1,4 @@
-import { IconButton, MuiThemeProvider } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import * as React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -46,12 +46,13 @@ function App() {
     setGames(games);
   }
 
-  function removeGames(e, id) {
-    // e.stopPropagation();
-    fetch(baseURL + `/${id}`, {
-      method: "DELETE",
+  function handleAddGame(newGame) {
+    fetch(baseURL, {
+      method: "POST",
+      headers: new Headers({ "content-type": "application/json" }),
+      body: JSON.stringify(newGame),
     });
-    setGames((currentGames) => currentGames.filter((game) => game.id !== id));
+    setGames([...games, newGame]);
   }
 
   function handleUpdateGames(updatedGame, id) {
@@ -61,15 +62,13 @@ function App() {
       body: JSON.stringify(updatedGame),
     });
   }
-
-  function handleAddGame(newGame) {
-    fetch(baseURL, {
-      method: "POST",
-      headers: new Headers({ "content-type": "application/json" }),
-      body: JSON.stringify(newGame),
+  function removeGames(id) {
+    fetch(baseURL + `/${id}`, {
+      method: "DELETE",
     });
-    setGames([...games, newGame]);
+    setGames((currentGames) => currentGames.filter((game) => game.id !== id));
   }
+
   return (
     <div className="App">
       <AppBar position="static">
@@ -95,19 +94,20 @@ function App() {
         <Route
           exact
           path="library"
-          element={<GameLibrary games={games} setGames={setGames} />}
+          element={
+            <GameLibrary
+              games={games}
+              setGames={setGames}
+              removeGames={removeGames}
+              fetchAllGames={fetchAllGames}
+              handleUpdateGames={handleUpdateGames}
+            />
+          }
         />
         <Route
           exact
           path="form"
-          element={
-            <Form
-              fetchAllGames={fetchAllGames}
-              removeGames={removeGames}
-              handleUpdateGames={handleUpdateGames}
-              handleAddGame={handleAddGame}
-            />
-          }
+          element={<Form handleAddGame={handleAddGame} />}
         />
         <Route exact path="login" element={<Login />} />
       </Routes>

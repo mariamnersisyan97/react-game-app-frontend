@@ -8,7 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-const GameCard = ({ game }) => {
+const GameCard = ({ game, removeGames }) => {
   //   const useStyles = makeStyles({
   //     root: {
   //       maxWidth: 345,
@@ -17,6 +17,14 @@ const GameCard = ({ game }) => {
   //       height: 140,
   //     },
   //   });
+
+  const handleDelete = () => {
+    console.log("deleted");
+  };
+
+  const handleEdit = () => {
+    console.log("edit");
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -36,36 +44,14 @@ const GameCard = ({ game }) => {
       <CardActions>
         <Button variant="contained">Add to Cart</Button>
         <Button variant="contained">❤️ </Button>
-        <Button variant="contained">Delete</Button>
+        <Button variant="contained" onClick={handleDelete}>
+          Delete
+        </Button>
+        <Button variant="contained" onClick={handleEdit}>
+          Edit
+        </Button>
       </CardActions>
     </Card>
-    // <Card className={game.root}>
-    //   <CardActionArea>
-    //     <CardMedia className="gameURL" image={game.imageURL} />
-    //     <CardContent>
-    //       <Typography gutterBottom variant="h5" component="h2">
-    //         {game.title}
-    //       </Typography>
-    //       <Typography variant="body2" color="textSecondary" component="p">
-    //         {game.release_date}
-    //       </Typography>
-    //     </CardContent>
-    //   </CardActionArea>
-    //   <CardActions>
-    //     <Button size="small" color="primary">
-    //       Add to Cart
-    //     </Button>
-    //     <Button size="small" color="primary">
-    //       ❤️
-    //     </Button>
-    //   </CardActions>
-    // </Card>
-
-    // <div className="game-card">
-    //   <h1>{game.title}</h1>
-    //   <p>{game.imageURL}</p>
-    //   <p>{game.release_date}</p>
-    // </div>
   );
 };
 
