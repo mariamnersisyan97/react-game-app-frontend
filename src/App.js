@@ -6,14 +6,13 @@ import Home from "./navigation/components/Home";
 import { Login } from "./navigation/components/Login";
 import Navbar from "./navigation/components/Navbar";
 import GameLibrary from "./navigation/components/GameLibrary";
-import Form from "./navigation/components/Form";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { useState, useEffect } from "react";
 
-function App() {
+function App({}) {
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -26,8 +25,6 @@ function App() {
     },
   }));
   const classes = useStyles();
-
-  // const [loginRender, setLoginRender] = useState("");
 
   const [games, setGames] = useState([]);
 
@@ -46,15 +43,22 @@ function App() {
     setGames(games);
   }
 
+  // function handleAddGame(newGame) {
+  //   fetch(baseURL, {
+  //     method: "POST",
+  //     headers: new Headers({ "Content-Type": "application/json" }),
+  //     body: JSON.stringify(newGame),
+  //   })
+  //     .then((r) => r.json())
+  //     .then((newGame) => {
+  //       onAddGame(newGame);
+  //     });
+  //   setGames([...games, newGame]);
+  // }
+
   function handleAddGame(newGame) {
-    fetch(baseURL, {
-      method: "POST",
-      headers: new Headers({ "content-type": "application/json" }),
-      body: JSON.stringify(newGame),
-    });
     setGames([...games, newGame]);
   }
-
   function handleUpdateGames(updatedGame, id) {
     fetch(baseURL + `/${id}`, {
       method: "PATCH",
@@ -82,15 +86,12 @@ function App() {
           <Typography variant="h6" className={classes.title}>
             Gamebox
           </Typography>
-
-          {/* <div>{loginRender === "Login" && <Login />}</div> */}
         </Toolbar>
       </AppBar>
 
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        {/* <Route exact path="navbar" element={<Navbar />} /> */}
         <Route
           exact
           path="library"
@@ -101,13 +102,9 @@ function App() {
               removeGames={removeGames}
               fetchAllGames={fetchAllGames}
               handleUpdateGames={handleUpdateGames}
+              handleAddGame={handleAddGame}
             />
           }
-        />
-        <Route
-          exact
-          path="form"
-          element={<Form handleAddGame={handleAddGame} />}
         />
         <Route exact path="login" element={<Login />} />
       </Routes>

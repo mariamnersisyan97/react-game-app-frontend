@@ -1,29 +1,23 @@
 import React from "react";
-// import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-// import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import EditIcon from "@material-ui/icons/Edit";
+import EditForm from "./EditForm";
+import { useState } from "react";
 
-const GameCard = ({ game, removeGames }) => {
-  //   const useStyles = makeStyles({
-  //     root: {
-  //       maxWidth: 345,
-  //     },
-  //     media: {
-  //       height: 140,
-  //     },
-  //   });
-
+const GameCard = ({ game, removeGames, handleUpdateGames }) => {
   const handleDelete = () => {
+    removeGames();
     console.log("deleted");
   };
+  const [edit, setEdit] = useState(false);
 
   const handleEdit = () => {
-    console.log("edit");
+    setEdit(true);
   };
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -47,9 +41,8 @@ const GameCard = ({ game, removeGames }) => {
         <Button variant="contained" onClick={handleDelete}>
           Delete
         </Button>
-        <Button variant="contained" onClick={handleEdit}>
-          Edit
-        </Button>
+
+        <EditIcon onClick={handleEdit}> {edit && <EditForm />}</EditIcon>
       </CardActions>
     </Card>
   );
