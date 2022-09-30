@@ -9,16 +9,36 @@ import EditIcon from "@material-ui/icons/Edit";
 import EditForm from "./EditForm";
 import { useState } from "react";
 
-const GameCard = ({ game, removeGames, handleUpdateGames }) => {
-  const handleDelete = () => {
-    removeGames();
-    console.log("deleted");
-  };
+const GameCard = ({ game, games, setGames, onGameDelete }) => {
   const [edit, setEdit] = useState(false);
 
   const handleEdit = () => {
     setEdit(true);
   };
+
+  // function removeGames(id) {
+  //   fetch(`http://localhost:9292/games/${id}`, {
+  //     method: "DELETE",
+  //   });
+  //   setGames((currentGames) => currentGames.filter((game) => game.id !== id));
+  // }
+  // function removeGames(id) {
+  //   const updatedGames = games.filter((game) => game.id !== id);
+  //   setGames(updatedGames);
+  // }
+
+  // const removeGames = (e) => {
+  //   if (games) {
+  //     setGames(games.filter((el) => el.id !== game.id));
+  //   }
+  // };
+
+  function handleDeleteButton(id) {
+    fetch(`http://localhost:9292/games/${id}`, {
+      method: "DELETE",
+    });
+    onGameDelete(game.id);
+  }
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -38,7 +58,7 @@ const GameCard = ({ game, removeGames, handleUpdateGames }) => {
       <CardActions>
         <Button variant="contained">Add to Cart</Button>
         <Button variant="contained">❤️ </Button>
-        <Button variant="contained" onClick={handleDelete}>
+        <Button variant="contained" onClick={handleDeleteButton}>
           Delete
         </Button>
 

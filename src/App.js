@@ -36,26 +36,16 @@ function App({}) {
       .then(setGames);
   }, []);
 
-  function fetchAllGames() {
-    fetch(baseURL)
-      .then((r) => r.json())
-      .then((data) => setGames(data));
-    setGames(games);
-  }
-
-  // function handleAddGame(newGame) {
-  //   fetch(baseURL, {
-  //     method: "POST",
-  //     headers: new Headers({ "Content-Type": "application/json" }),
-  //     body: JSON.stringify(newGame),
-  //   })
+  // function fetchAllGames() {
+  //   fetch(baseURL)
   //     .then((r) => r.json())
-  //     .then((newGame) => {
-  //       onAddGame(newGame);
-  //     });
-  //   setGames([...games, newGame]);
+  //     .then((data) => setGames(data));
+  //   setGames(games);
   // }
-
+  function handleDeleteGame(id) {
+    const updatedGames = games.filter((game) => game.id !== id);
+    setGames(updatedGames);
+  }
   function handleAddGame(newGame) {
     setGames([...games, newGame]);
   }
@@ -65,12 +55,6 @@ function App({}) {
       headers: new Headers({ "content-type": "application/json" }),
       body: JSON.stringify(updatedGame),
     });
-  }
-  function removeGames(id) {
-    fetch(baseURL + `/${id}`, {
-      method: "DELETE",
-    });
-    setGames((currentGames) => currentGames.filter((game) => game.id !== id));
   }
 
   return (
@@ -99,8 +83,7 @@ function App({}) {
             <GameLibrary
               games={games}
               setGames={setGames}
-              removeGames={removeGames}
-              fetchAllGames={fetchAllGames}
+              onGameDelete={handleDeleteGame}
               handleUpdateGames={handleUpdateGames}
               handleAddGame={handleAddGame}
             />

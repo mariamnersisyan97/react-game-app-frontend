@@ -4,12 +4,15 @@ import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-// import Menu from "@material-ui/core/Menu";
-// import MenuItem from "@material-ui/core/MenuItem";
 
-const GameLibrary = ({ games, handleAddGame }) => {
+const GameLibrary = ({ games, handleAddGame, removeGames, onGameDelete }) => {
   const renderGames = games.map((game) => (
-    <GameCard key={game.id} game={game} />
+    <GameCard
+      key={game.id}
+      game={game}
+      removeGames={removeGames}
+      onGameDelete={onGameDelete}
+    />
   ));
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,7 +27,6 @@ const GameLibrary = ({ games, handleAddGame }) => {
 
   const [title, setTitle] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
-  // const [genreList, setGenreList] = useState(null);
   const [imageURL, setImageURL] = useState("");
 
   function handleSubmit(e) {
@@ -57,20 +59,10 @@ const GameLibrary = ({ games, handleAddGame }) => {
     console.log(e.target.value);
   };
 
-  // const genreHandler = (e) => {
-  //   setGenreList(e.currentTarget);
-  //   console.log(e.currentTarget);
-  //   console.log(e.target.value);
-  // };
-
   const imageURLHandler = (e) => {
     setImageURL(e.target.value);
     console.log(e.target.value);
   };
-
-  // const handleClose = () => {
-  //   setGenreList(null);
-  // };
 
   return (
     <div className="library">
@@ -89,31 +81,7 @@ const GameLibrary = ({ games, handleAddGame }) => {
           value={releaseDate}
           onChange={releaseDateHandler}
         />
-        {/* <Button
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={genreHandler}
-        >
-          Genres
-        </Button> */}
-        {/* <Menu
-          id="simple-menu"
-          value={genreList}
-          keepMounted
-          open={Boolean(genreList)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Role Playing Game</MenuItem>
-          <MenuItem onClick={handleClose}>Open World</MenuItem>
-          <MenuItem onClick={handleClose}>First-Person Shooter</MenuItem>
-          <MenuItem onClick={handleClose}>Puzzle</MenuItem>
-          <MenuItem onClick={handleClose}>Simulation</MenuItem>
-          <MenuItem onClick={handleClose}>Action-adventure</MenuItem>
-          <MenuItem onClick={handleClose}>
-            Multiplayer Online Battle Arena
-          </MenuItem>
-          <MenuItem onClick={handleClose}>Sports</MenuItem>
-        </Menu> */}
+
         <TextField
           id="outlined-basic"
           label="Image URL"
