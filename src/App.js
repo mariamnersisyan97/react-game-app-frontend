@@ -36,12 +36,6 @@ function App({}) {
       .then(setGames);
   }, []);
 
-  // function fetchAllGames() {
-  //   fetch(baseURL)
-  //     .then((r) => r.json())
-  //     .then((data) => setGames(data));
-  //   setGames(games);
-  // }
   function handleDeleteGame(id) {
     const updatedGames = games.filter((game) => game.id !== id);
     setGames(updatedGames);
@@ -49,12 +43,22 @@ function App({}) {
   function handleAddGame(newGame) {
     setGames([...games, newGame]);
   }
-  function handleUpdateGames(updatedGame, id) {
-    fetch(baseURL + `/${id}`, {
-      method: "PATCH",
-      headers: new Headers({ "content-type": "application/json" }),
-      body: JSON.stringify(updatedGame),
+  // function handleUpdateGames(updatedGame, id) {
+  //   fetch(baseURL + `/${id}`, {
+  //     method: "PATCH",
+  //     headers: new Headers({ "content-type": "application/json" }),
+  //     body: JSON.stringify(updatedGame),
+  //   });
+  // }
+  function handleUpdateGames(updatedGameObj) {
+    const updatedGameCard = games.map((game) => {
+      if (game.id === updatedGameObj.id) {
+        return updatedGameObj;
+      } else {
+        return game;
+      }
     });
+    setGames(updatedGameCard);
   }
 
   return (
@@ -84,8 +88,8 @@ function App({}) {
               games={games}
               setGames={setGames}
               onGameDelete={handleDeleteGame}
-              handleUpdateGames={handleUpdateGames}
               handleAddGame={handleAddGame}
+              handleUpdateGames={handleUpdateGames}
             />
           }
         />

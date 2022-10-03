@@ -5,13 +5,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
-const GameLibrary = ({ games, handleAddGame, removeGames, onGameDelete }) => {
+const GameLibrary = ({
+  games,
+  handleAddGame,
+  removeGames,
+  onGameDelete,
+  handleUpdateGames,
+}) => {
   const renderGames = games.map((game) => (
     <GameCard
       key={game.id}
       game={game}
       removeGames={removeGames}
       onGameDelete={onGameDelete}
+      handleUpdateGames={handleUpdateGames}
     />
   ));
   const useStyles = makeStyles((theme) => ({

@@ -17,7 +17,6 @@ export const Login = () => {
   const [login, setLogin] = useState(false);
 
   const handleClick = () => {
-    console.log("logged in");
     setLogin(true);
   };
 
