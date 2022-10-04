@@ -7,9 +7,16 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
 import { useState } from "react";
-import EditGame from "../EditGame";
+import EditGame from "./EditGame";
 
-const GameCard = ({ game, onGameDelete, handleUpdateGames, id }) => {
+const GameCard = ({
+  game,
+  onGameDelete,
+  handleUpdateGames,
+  id,
+  genres,
+  setGenres,
+}) => {
   const [editing, setEditing] = useState(false);
 
   function handleDeleteButton(id) {
@@ -38,6 +45,8 @@ const GameCard = ({ game, onGameDelete, handleUpdateGames, id }) => {
         <Typography variant="body2">
           Release Date: {game.release_date}
         </Typography>
+        <Typography variant="body2">{game.genre_id}</Typography>
+        <Typography variant="body2">{genres.name}</Typography>
       </CardContent>
       <CardActions>
         <Button variant="contained">Add to Cart</Button>

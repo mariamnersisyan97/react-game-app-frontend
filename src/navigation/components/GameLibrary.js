@@ -5,12 +5,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+
 const GameLibrary = ({
   games,
   handleAddGame,
   removeGames,
   onGameDelete,
   handleUpdateGames,
+  genres,
+  setGenres,
 }) => {
   const renderGames = games.map((game) => (
     <GameCard
@@ -19,8 +24,11 @@ const GameLibrary = ({
       removeGames={removeGames}
       onGameDelete={onGameDelete}
       handleUpdateGames={handleUpdateGames}
+      genres={genres}
+      setGenres={setGenres}
     />
   ));
+
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {
@@ -29,6 +37,20 @@ const GameLibrary = ({
       },
     },
   }));
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const renderGenres = genres.map((genre) => {
+    <MenuItem onClick={handleClose}>{genre}</MenuItem>;
+  });
 
   const classes = useStyles();
 
@@ -100,6 +122,24 @@ const GameLibrary = ({
           Add to Library
         </Button>
       </form>
+      <Button
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        Filter by Genre
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        {renderGenres}
+        {/* <MenuItem onClick={handleClose}>{renderGenres}</MenuItem> */}
+      </Menu>
+
       <h1>Game Library</h1>
       <ul>{renderGames}</ul>
     </div>

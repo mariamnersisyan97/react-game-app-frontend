@@ -27,6 +27,7 @@ function App({}) {
   const classes = useStyles();
 
   const [games, setGames] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   const baseURL = `http://localhost:9292/games`;
 
@@ -34,6 +35,12 @@ function App({}) {
     fetch(baseURL)
       .then((r) => r.json())
       .then(setGames);
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:9292/genres`)
+      .then((r) => r.json())
+      .then(setGenres);
   }, []);
 
   function handleDeleteGame(id) {
@@ -90,6 +97,8 @@ function App({}) {
               onGameDelete={handleDeleteGame}
               handleAddGame={handleAddGame}
               handleUpdateGames={handleUpdateGames}
+              genres={genres}
+              setGenres={setGenres}
             />
           }
         />
