@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GameCard from "./GameCard";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -48,9 +48,15 @@ const GameLibrary = ({
     setAnchorEl(null);
   };
 
-  const renderGenres = genres.map((genre) => {
-    <MenuItem onClick={handleClose}>{genre}</MenuItem>;
-  });
+  // useEffect(() => {
+  //   fetch(`http://localhost:9292/genres`)
+  //     .then((r) => r.json())
+  //     .then(setGenres);
+  // });
+
+  // const renderGenres = genres.map((genre) => {
+  //   return <MenuItem onClick={handleClose}>{genre}</MenuItem>;
+  // });
 
   const classes = useStyles();
 
@@ -136,7 +142,7 @@ const GameLibrary = ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {renderGenres}
+        {/* {renderGenres} */}
         {/* <MenuItem onClick={handleClose}>{renderGenres}</MenuItem> */}
       </Menu>
 

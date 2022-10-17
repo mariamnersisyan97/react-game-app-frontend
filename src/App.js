@@ -12,7 +12,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { useState, useEffect } from "react";
 
-function App({}) {
+function App() {
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -27,7 +27,7 @@ function App({}) {
   const classes = useStyles();
 
   const [games, setGames] = useState([]);
-  const [genres, setGenres] = useState([]);
+  // const [genres, setGenres] = useState([]);
 
   const baseURL = `http://localhost:9292/games`;
 
@@ -37,11 +37,11 @@ function App({}) {
       .then(setGames);
   }, []);
 
-  useEffect(() => {
-    fetch(`http://localhost:9292/genres`)
-      .then((r) => r.json())
-      .then(setGenres);
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://localhost:9292/genres`)
+  //     .then((r) => r.json())
+  //     .then(setGenres);
+  // }, []);
 
   function handleDeleteGame(id) {
     const updatedGames = games.filter((game) => game.id !== id);
@@ -97,8 +97,8 @@ function App({}) {
               onGameDelete={handleDeleteGame}
               handleAddGame={handleAddGame}
               handleUpdateGames={handleUpdateGames}
-              genres={genres}
-              setGenres={setGenres}
+              // genres={genres}
+              // setGenres={setGenres}
             />
           }
         />

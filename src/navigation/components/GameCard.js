@@ -45,8 +45,8 @@ const GameCard = ({
         <Typography variant="body2">
           Release Date: {game.release_date}
         </Typography>
-        <Typography variant="body2">{game.genre_id}</Typography>
-        <Typography variant="body2">{genres.name}</Typography>
+        <Typography variant="body2">Genre ID: {game.genre_id}</Typography>
+        {/* <Typography variant="body2">{genres.name}</Typography> */}
       </CardContent>
       <CardActions>
         <Button variant="contained">Add to Cart</Button>
