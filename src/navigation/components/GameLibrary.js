@@ -6,7 +6,6 @@ import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
 import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 
 const GameLibrary = ({
   games,
@@ -17,6 +16,11 @@ const GameLibrary = ({
   genres,
   setGenres,
 }) => {
+  // useEffect(() => {
+  //   fetch(`http://localhost:9292/genres`)
+  //     .then((r) => r.json())
+  //     .then(setGenres);
+  // });
   const renderGames = games.map((game) => (
     <GameCard
       key={game.id}
@@ -47,12 +51,6 @@ const GameLibrary = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // useEffect(() => {
-  //   fetch(`http://localhost:9292/genres`)
-  //     .then((r) => r.json())
-  //     .then(setGenres);
-  // });
 
   // const renderGenres = genres.map((genre) => {
   //   return <MenuItem onClick={handleClose}>{genre}</MenuItem>;
@@ -128,13 +126,14 @@ const GameLibrary = ({
           Add to Library
         </Button>
       </form>
-      <Button
+
+      {/* <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
       >
         Filter by Genre
-      </Button>
+      </Button> */}
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -145,6 +144,13 @@ const GameLibrary = ({
         {/* {renderGenres} */}
         {/* <MenuItem onClick={handleClose}>{renderGenres}</MenuItem> */}
       </Menu>
+
+      <select name="genre_id">
+        <option>Select a Genre</option>
+        {genres.map((g) => (
+          <option value={g.id}>{g.name}</option>
+        ))}
+      </select>
 
       <h1>Game Library</h1>
       <ul>{renderGames}</ul>

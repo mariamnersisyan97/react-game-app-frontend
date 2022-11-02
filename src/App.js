@@ -27,7 +27,7 @@ function App() {
   const classes = useStyles();
 
   const [games, setGames] = useState([]);
-  // const [genres, setGenres] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   const baseURL = `http://localhost:9292/games`;
 
@@ -37,11 +37,11 @@ function App() {
       .then(setGames);
   }, []);
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:9292/genres`)
-  //     .then((r) => r.json())
-  //     .then(setGenres);
-  // }, []);
+  useEffect(() => {
+    fetch(`http://localhost:9292/genres`)
+      .then((r) => r.json())
+      .then(setGenres);
+  }, []);
 
   function handleDeleteGame(id) {
     const updatedGames = games.filter((game) => game.id !== id);
@@ -57,16 +57,16 @@ function App() {
       body: JSON.stringify(updatedGame),
     });
   }
-  function handleUpdateGames(updatedGameObj) {
-    const updatedGameCard = games.map((game) => {
-      if (game.id === updatedGameObj.id) {
-        return updatedGameObj;
-      } else {
-        return game;
-      }
-    });
-    setGames(updatedGameCard);
-  }
+  // function handleUpdateGames(updatedGameObj) {
+  //   const updatedGameCard = games.map((game) => {
+  //     if (game.id === updatedGameObj.id) {
+  //       return updatedGameObj;
+  //     } else {
+  //       return game;
+  //     }
+  //   });
+  //   setGames(updatedGameCard);
+  // }
 
   return (
     <div className="App">
@@ -97,8 +97,8 @@ function App() {
               onGameDelete={handleDeleteGame}
               handleAddGame={handleAddGame}
               handleUpdateGames={handleUpdateGames}
-              // genres={genres}
-              // setGenres={setGenres}
+              genres={genres}
+              setGenres={setGenres}
             />
           }
         />
