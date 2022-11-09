@@ -16,11 +16,6 @@ const GameLibrary = ({
   genres,
   setGenres,
 }) => {
-  // useEffect(() => {
-  //   fetch(`http://localhost:9292/genres`)
-  //     .then((r) => r.json())
-  //     .then(setGenres);
-  // });
   const renderGames = games.map((game) => (
     <GameCard
       key={game.id}
@@ -51,10 +46,6 @@ const GameLibrary = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // const renderGenres = genres.map((genre) => {
-  //   return <MenuItem onClick={handleClose}>{genre}</MenuItem>;
-  // });
 
   const classes = useStyles();
 
@@ -127,23 +118,13 @@ const GameLibrary = ({
         </Button>
       </form>
 
-      {/* <Button
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        Filter by Genre
-      </Button> */}
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-      >
-        {/* {renderGenres} */}
-        {/* <MenuItem onClick={handleClose}>{renderGenres}</MenuItem> */}
-      </Menu>
+      ></Menu>
 
       <select name="genre_id">
         <option>Select a Genre</option>
