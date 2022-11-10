@@ -129,7 +129,9 @@ const GameLibrary = ({
       <select name="genre_id">
         <option>Select a Genre</option>
         {genres.map((g) => (
-          <option value={g.id}>{g.name}</option>
+          <option value={g.id} key={g.id}>
+            {g.name}
+          </option>
         ))}
       </select>
 

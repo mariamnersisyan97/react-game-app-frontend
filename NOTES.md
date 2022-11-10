@@ -7,3 +7,7 @@
 - Add a Game
 - Filter feature to filter through genre(in GLibrary)
 
+// Update games
+// sending nested JSON (displaying by genre)
+// Add to shopping cart feature
+// CRUD on genre (add a genre) click for new form
