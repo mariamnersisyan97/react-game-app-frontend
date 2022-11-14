@@ -11,7 +11,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { useState, useEffect } from "react";
-import AddGenre from "./navigation/components/AddGenre";
 
 function App() {
   const useStyles = makeStyles((theme) => ({
@@ -108,7 +107,6 @@ function App() {
           }
         />
         <Route exact path="login" element={<Login />} />
-        <Route exact path="genre" element={<AddGenre />} />
       </Routes>
     </div>
   );

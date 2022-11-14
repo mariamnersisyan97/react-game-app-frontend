@@ -15,6 +15,7 @@ const GameLibrary = ({
   handleUpdateGames,
   genres,
   setGenres,
+  handleAddGenre,
 }) => {
   const renderGames = games.map((game) => (
     <GameCard
@@ -73,6 +74,31 @@ const GameLibrary = ({
       });
   }
 
+  const [name, setName] = useState([]);
+
+  const handleGenreSubmit = (e) => {
+    e.preventDefault();
+
+    fetch("http://localhost:9292/genres", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+      }),
+    })
+      .then((r) => r.json())
+      .then((newGenreAdded) => {
+        handleAddGenre(newGenreAdded);
+      });
+  };
+
+  const nameHandler = (e) => {
+    setName(e.target.value);
+    console.log(e.target.value);
+  };
+
   const titleHandler = (e) => {
     setTitle(e.target.value);
     console.log(e.target.value);
@@ -127,13 +153,16 @@ const GameLibrary = ({
       ></Menu>
 
       <select name="genre_id">
-        <option>Select a Genre</option>
+        <option>Sort by Genre</option>
         {genres.map((g) => (
           <option value={g.id} key={g.id}>
             {g.name}
           </option>
         ))}
       </select>
+
+      <TextField value={name} onChange={nameHandler}></TextField>
+      <button onClick={handleGenreSubmit}>Add Genre</button>
 
       <h1>Game Library</h1>
       <ul>{renderGames}</ul>

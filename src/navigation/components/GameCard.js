@@ -50,7 +50,6 @@ const GameCard = ({
       </CardContent>
       <CardActions>
         <Button variant="contained">Add to Cart</Button>
-        <Button variant="contained">❤️ </Button>
         <Button variant="contained" onClick={handleDeleteButton}>
           Delete
         </Button>
