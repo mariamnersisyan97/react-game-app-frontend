@@ -9,14 +9,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import { useState } from "react";
 import EditGame from "./EditGame";
 
-const GameCard = ({
-  game,
-  onGameDelete,
-  handleUpdateGames,
-  id,
-  genres,
-  setGenres,
-}) => {
+const GameCard = ({ game, onGameDelete, handleUpdateGames, id }) => {
   const [editing, setEditing] = useState(false);
 
   function handleDeleteButton(id) {

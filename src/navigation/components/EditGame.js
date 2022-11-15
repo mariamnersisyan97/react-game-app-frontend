@@ -25,7 +25,7 @@ function EditGame({ game, handleUpdateGames }) {
         type="text"
         name="game"
         autoComplete="off"
-        value={gameTitle}
+        value={body}
         onChange={(e) => setGameTitle(e.target.value)}
       />
     </form>
