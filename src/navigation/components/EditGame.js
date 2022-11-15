@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
 function EditGame({ game, handleUpdateGames }) {
-  const [gameTitle, setGameTitle] = useState(game.title);
-
-  const { title, id } = game;
+  const { title, release_date, id } = game;
+  const [form, setForm] = useState({
+    title: title,
+    release_date: release_date,
+  });
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -12,22 +14,30 @@ function EditGame({ game, handleUpdateGames }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        body: gameTitle,
-      }),
+      body: JSON.stringify(form),
     })
       .then((r) => r.json())
-      .then((updatedGameTitle) => handleUpdateGames(updatedGameTitle));
+      .then((updatedGame) => handleUpdateGames(updatedGame));
   }
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.title]: e.target.value });
+  };
   return (
     <form onSubmit={handleFormSubmit}>
       <input
         type="text"
         name="game"
         autoComplete="off"
-        value={body}
-        onChange={(e) => setGameTitle(e.target.value)}
+        value={form.title}
+        onChange={(e) => setForm(e.target.value)}
       />
+      <input
+        type="text"
+        name="date"
+        value={form.release_date}
+        // onChange={handleChange}
+      />
+      <button>Save</button>
     </form>
   );
 }

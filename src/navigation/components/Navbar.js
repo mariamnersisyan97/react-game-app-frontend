@@ -7,7 +7,6 @@ const Navbar = () => {
       <NavLink to="/">🏠</NavLink>
       <NavLink to="/library">🎮</NavLink>
       <NavLink to="/login">👤</NavLink>
-      <NavLink to="/genre">G</NavLink>
     </div>
   );
 };
