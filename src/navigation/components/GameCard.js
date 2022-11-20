@@ -1,11 +1,8 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import EditIcon from "@material-ui/icons/Edit";
 import { useState } from "react";
 import EditGame from "./EditGame";
 
@@ -24,42 +21,34 @@ const GameCard = ({ game, onGameDelete, handleUpdateGames, id }) => {
     handleUpdateGames(updatedGame);
   }
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        alt={game.title}
-        height="300"
-        image={game.imageURL}
-      />
+    <Card>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {game.title}
-        </Typography>
-        <Typography variant="body2">
-          Release Date: {game.release_date}
-        </Typography>
-        <Typography variant="body2">Genre ID: {game.genre_id}</Typography>
-        {/* <Typography variant="body2">{genres.name}</Typography> */}
+        <CardMedia
+          component="img"
+          alt={game.title}
+          height="300"
+          image={game.imageURL}
+        />
+        <button onClick={handleDeleteButton}>🗑️</button>
       </CardContent>
-      <CardActions>
-        <Button variant="contained">Add to Cart</Button>
-        <Button variant="contained" onClick={handleDeleteButton}>
-          Delete
-        </Button>
-
-        <EditIcon onClick={() => setEditing((editing) => !editing)}>
-          {" "}
-          {editing ? (
-            <EditGame
-              key={id}
-              game={game}
-              handleUpdateGames={handleUpdateGames}
-            />
-          ) : (
-            <p>{game}</p>
-          )}
-        </EditIcon>
-      </CardActions>
+      {editing ? (
+        <EditGame
+          key={id}
+          game={game}
+          editing={editing}
+          setEditing={setEditing}
+          handleUpdateGames={handleUpdateGames}
+          handleUpdatingGame={handleUpdatingGame}
+        />
+      ) : (
+        <CardContent>
+          <Typography>{game.title}</Typography>
+          <Typography>{game.release_date}</Typography>
+          <button onClick={() => setEditing((editing) => !editing)}>
+            Edit
+          </button>
+        </CardContent>
+      )}
     </Card>
   );
 };

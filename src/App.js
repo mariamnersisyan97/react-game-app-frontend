@@ -53,23 +53,17 @@ function App() {
   function handleAddGenre(newGenre) {
     setGenres([...genres, newGenre]);
   }
-  function handleUpdateGames(updatedGame, id) {
-    fetch(baseURL + `/${id}`, {
-      method: "PATCH",
-      headers: new Headers({ "content-type": "application/json" }),
-      body: JSON.stringify(updatedGame),
+
+  function handleUpdateGames(updatedGameObj) {
+    const updatedGameCard = games.map((game) => {
+      if (game.id === updatedGameObj.id) {
+        return updatedGameObj;
+      } else {
+        return game;
+      }
     });
+    setGames(updatedGameCard);
   }
-  // function handleUpdateGames(updatedGameObj) {
-  //   const updatedGameCard = games.map((game) => {
-  //     if (game.id === updatedGameObj.id) {
-  //       return updatedGameObj;
-  //     } else {
-  //       return game;
-  //     }
-  //   });
-  //   setGames(updatedGameCard);
-  // }
 
   return (
     <div className="App">
@@ -99,10 +93,10 @@ function App() {
               setGames={setGames}
               onGameDelete={handleDeleteGame}
               handleAddGame={handleAddGame}
-              handleUpdateGames={handleUpdateGames}
               genres={genres}
               setGenres={setGenres}
               handleAddGenre={handleAddGenre}
+              handleUpdateGames={handleUpdateGames}
             />
           }
         />
