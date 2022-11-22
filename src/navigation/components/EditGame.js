@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-function EditGame({ game, handleUpdateGames, setEditing, handleUpdatingGame }) {
+function EditGame({ game, setEditing, handleUpdatingGame }) {
   const { title, release_date, id } = game;
   const [form, setForm] = useState({
     title: title,
-    // release_date: release_date,
+    release_date: release_date,
   });
 
   function handleFormSubmit(e) {
@@ -14,7 +14,7 @@ function EditGame({ game, handleUpdateGames, setEditing, handleUpdatingGame }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ form }),
+      body: JSON.stringify(form),
     })
       .then((r) => r.json())
       .then((updatedGame) => {
@@ -31,14 +31,15 @@ function EditGame({ game, handleUpdateGames, setEditing, handleUpdatingGame }) {
         name="game"
         autoComplete="off"
         value={form.title}
-        onChange={(e) => setForm(e.target.title)}
+        onChange={(e) => setForm({ ...form, title: e.target.value })}
       />
-      {/* <inputd
+      <input
         type="text"
         name="date"
+        autoComplete="off"
         value={form.release_date}
-        onChange={(e) => setForm(e.target.value)}
-      /> */}
+        onChange={(e) => setForm({ ...form, release_date: e.target.value })}
+      />
       <button>Save</button>
     </form>
   );
