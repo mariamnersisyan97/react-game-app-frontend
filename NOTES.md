@@ -8,6 +8,6 @@
 - Filter feature to filter through genre(in GLibrary)
 
 TODO List
-// Update games
+
 // sending nested JSON (displaying by genre)
 // Add to shopping cart feature

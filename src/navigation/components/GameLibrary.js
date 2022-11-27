@@ -4,11 +4,12 @@ import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-
 import Menu from "@material-ui/core/Menu";
+import FilteredGames from "../FilteredGames";
 
 const GameLibrary = ({
   games,
+  setGames,
   handleAddGame,
   removeGames,
   onGameDelete,
@@ -53,6 +54,18 @@ const GameLibrary = ({
   const [title, setTitle] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
   const [imageURL, setImageURL] = useState("");
+  const [filter, setFilter] = useState(games);
+  // const [filteredGames, setFilteredGames] = useState("");
+
+  // useEffect(() => {
+  //   let emptyGamesArray = [];
+  //   if (filter === "none" || filter === "") {
+  //     emptyGamesArray = games;
+  //   } else {
+  //     emptyGamesArray = genres.filter((genre) => genre.game === filter);
+  //   }
+  //   setFilteredGames(emptyGamesArray);
+  // }, [filter, games]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -114,6 +127,29 @@ const GameLibrary = ({
     console.log(e.target.value);
   };
 
+  const handleFilterValue = (e) => {
+    setFilter(e.target.value);
+    console.log(e.target.value);
+  };
+
+  // //on id select, filter games based on genre
+  // function filteredGames(id) {
+  //   const filteredGamesList = genres.map((genre) => {
+  //     if (id === genre.id) {
+  //       return { ...genre.game };
+  //     } else {
+  //       return games;
+  //     }
+  //   });
+  //   setFilter(filteredGamesList);
+  // }
+  // //attempt 2 to render filter
+  // const renderFilteredGames = (id) => {
+  //   const newGames = genres.filter((genre) => {
+  //     return genre.id === id;
+  //   });
+  //   setGames(newGames);
+  // };
   return (
     <div className="library">
       <form className={classes.root} noValidate autoComplete="off">
@@ -151,23 +187,29 @@ const GameLibrary = ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       ></Menu>
-
-      <select name="genre_id">
-        <option>Sort by Genre</option>
-        {genres.map((g) => (
-          <option value={g.id} key={g.id}>
-            {g.name}
-          </option>
-        ))}
-      </select>
+      <form>
+        <select name="genre_id" onChange={handleFilterValue} value={filter}>
+          <option>Sort by Genre</option>
+          {genres.map((g) => (
+            <option value={g.id} key={g.id}>
+              {g.name}
+            </option>
+          ))}
+        </select>
+        <button>Sort</button>
+      </form>
 
       <TextField value={name} onChange={nameHandler}></TextField>
       <button onClick={handleGenreSubmit}>Add Genre</button>
 
       <h1>Game Library</h1>
       <ul>{renderGames}</ul>
+      <FilteredGames />
     </div>
   );
 };
 
 export default GameLibrary;
+
+// onClick of genre id, filter genre & display games in that genre
+// rake console. Genre.first.games/Genre.last.games
