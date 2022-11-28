@@ -1,21 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GameCard from "./GameCard";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
-import FilteredGames from "../FilteredGames";
 
 const GameLibrary = ({
   games,
-  setGames,
   handleAddGame,
   removeGames,
   onGameDelete,
   handleUpdateGames,
   genres,
   setGenres,
+  setGames,
   handleAddGenre,
 }) => {
   const renderGames = games.map((game) => (
@@ -41,10 +40,6 @@ const GameLibrary = ({
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -55,17 +50,6 @@ const GameLibrary = ({
   const [releaseDate, setReleaseDate] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [filter, setFilter] = useState(games);
-  // const [filteredGames, setFilteredGames] = useState("");
-
-  // useEffect(() => {
-  //   let emptyGamesArray = [];
-  //   if (filter === "none" || filter === "") {
-  //     emptyGamesArray = games;
-  //   } else {
-  //     emptyGamesArray = genres.filter((genre) => genre.game === filter);
-  //   }
-  //   setFilteredGames(emptyGamesArray);
-  // }, [filter, games]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -130,26 +114,15 @@ const GameLibrary = ({
   const handleFilterValue = (e) => {
     setFilter(e.target.value);
     console.log(e.target.value);
+    let filteredGames = [];
+    if (e.target.value === "") {
+      filteredGames = games;
+    } else {
+      filteredGames = games.filter((game) => game.genre_id === filter);
+    }
+    setGames(filteredGames);
   };
 
-  // //on id select, filter games based on genre
-  // function filteredGames(id) {
-  //   const filteredGamesList = genres.map((genre) => {
-  //     if (id === genre.id) {
-  //       return { ...genre.game };
-  //     } else {
-  //       return games;
-  //     }
-  //   });
-  //   setFilter(filteredGamesList);
-  // }
-  // //attempt 2 to render filter
-  // const renderFilteredGames = (id) => {
-  //   const newGames = genres.filter((genre) => {
-  //     return genre.id === id;
-  //   });
-  //   setGames(newGames);
-  // };
   return (
     <div className="library">
       <form className={classes.root} noValidate autoComplete="off">
@@ -204,12 +177,9 @@ const GameLibrary = ({
 
       <h1>Game Library</h1>
       <ul>{renderGames}</ul>
-      <FilteredGames />
+      {/* <FilteredGames games={games} genres={genres} /> */}
     </div>
   );
 };
 
 export default GameLibrary;
-
-// onClick of genre id, filter genre & display games in that genre
-// rake console. Genre.first.games/Genre.last.games

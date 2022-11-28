@@ -18,7 +18,6 @@ function EditGame({ game, setEditing, handleUpdatingGame }) {
     })
       .then((r) => r.json())
       .then((updatedGame) => {
-        console.log("update");
         handleUpdatingGame(updatedGame);
         setEditing(false);
       });
