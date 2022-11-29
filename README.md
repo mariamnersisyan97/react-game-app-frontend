@@ -1,3 +1,26 @@
+<h1>GameBox</h1>
+
+<h1>Desription</h1>
+GameBox was designed to showcase a database of games entirely structures through genres. Each genre holds a set of appropriately labeled games for your interaction.
+
+Technologies
+React
+Active Record
+Ruby
+Sinatra
+CSS
+Javascript
+
+Setup
+To run this project:
+
+Reposity URL:
+Front-End: https://github.com/mariamnersisyan97/react-game-app-frontend
+Back-End: https://github.com/mariamnersisyan97/phase-3-sinatra-react-project
+
+Ruby Methods & Active Record
+https://medium.com/@mariamnersisyan97/helpful-ruby-methods-in-active-record-5cbc1ac8462b
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
