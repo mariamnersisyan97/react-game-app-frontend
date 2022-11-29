@@ -113,14 +113,8 @@ const GameLibrary = ({
 
   const handleFilterValue = (e) => {
     setFilter(e.target.value);
-    console.log(e.target.value);
-    let filteredGames = [];
-    if (e.target.value === "") {
-      filteredGames = games;
-    } else {
-      filteredGames = games.filter((game) => game.genre_id === filter);
-    }
-    setGames(filteredGames);
+    const genre = genres.find((genre) => parseInt(e.target.value) === genre.id);
+    setGames(genre.games);
   };
 
   return (
@@ -177,7 +171,6 @@ const GameLibrary = ({
 
       <h1>Game Library</h1>
       <ul>{renderGames}</ul>
-      {/* <FilteredGames games={games} genres={genres} /> */}
     </div>
   );
 };
